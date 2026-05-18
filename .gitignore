@@ -1,0 +1,26 @@
+# Compilação e Artefatos
+target/
+*.war
+*.jar
+*.ear
+*.class
+
+# Configurações locais do Eclipse
+.metadata/
+.bin/
+.settings/
+.project
+.classpath
+.factorypath
+
+# Logs e arquivos temporários
+*.log
+.scaffolding/
+Workspaces/
+
+# Arquivos do Sistema Operacional
+.DS_Store
+Thumbs.db
+
+# Variáveis de ambiente e credenciais sensíveis
+.env
