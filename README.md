@@ -37,8 +37,9 @@ CREATE DATABASE sisjur_db;
 - [x] Homologação e sincronização da matriz de dependências no pom.xml.
 - [x] Criação da arquitetura de pacotes Java corporativos (model, dao, bean, util).
 - [x] Configuração do arquivo central de persistência da JPA (persistence.xml).
-- [x] Implementação de classe temporária de testes (Main) e validação com sucesso da conexão com o PostgreSQL.
-- [ ] Desenvolvimento das classes do modelo e mapeamento de entidades (pacote model).
+- [x] Criação e mapeamento da primeira entidade do sistema (`Advogado` no pacote model).
+- [x] Implementação de classe temporária de testes (Main) e validação com sucesso da conexão com o PostgreSQL e inserção de dados.
+- [ ] Desenvolvimento das demais classes do modelo (Cliente e Agendamento no pacote model).
 - [ ] Desenvolvimento da camada de persistência de dados (AdvogadoDAO, ClienteDAO, AgendamentoDAO).
 - [ ] Implementação dos Managed Beans (camada de controle do JSF) para gerenciamento das regras de tela.
 - [ ] Construção das interfaces gráficas em XHTML utilizando componentes PrimeFaces.
