@@ -9,7 +9,7 @@ Componente backend corporativo para gerenciamento e controle de consultas e agen
 * **Gerenciador de Build:** Maven 3.x
 * **Servidor de Aplicação:** Apache Tomcat 9.x
 * **Banco de Dados:** PostgreSQL 18.3
-* **Mapeamento Objeto-Relacional (ORM):** Hibernate Core 5.6.15.Final
+* **Mapeamento Objeto-Relacional (ORM):** JPA 2.2 / Hibernate Core 5.6.15.Final
 * **Framework MVC / Visão:** JSF 2.2.20 (Mojarra)
 * **Componentes de UI:** PrimeFaces 13.0
 
@@ -25,5 +25,10 @@ CREATE DATABASE sisjur_db;
 - [x] Configuração de autenticação remota segura via GitHub Personal Access Token (GHP).
 - [x] Criação do primeiro commit estável e push da branch main.
 - [x] Homologação e sincronização da matriz de dependências no pom.xml.
-- [ ] Criação da arquitetura de pacotes Java corporativos (model, dao, controller, util).
-- [ ] Configuração do arquivo central de persistência (hibernate.cfg.xml).
+- [x] Criação da arquitetura de pacotes Java corporativos (model, dao, bean, util).
+- [ ] Configuração do arquivo central de persistência da JPA (persistence.xml).
+- [ ] Implementação de classe de teste para geração automática das tabelas no PostgreSQL.
+- [ ] Desenvolvimento das classes do modelo e mapeamento de entidades (pacote model).
+- [ ] Desenvolvimento da camada de persistência de dados (AdvogadoDAO, ClienteDAO, AgendamentoDAO).
+- [ ] Implementação dos Managed Beans (camada de controle do JSF) para gerenciamento das regras de tela.
+- [ ] Construção das interfaces gráficas em XHTML utilizando componentes PrimeFaces.
