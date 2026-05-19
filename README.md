@@ -15,10 +15,20 @@ Componente backend corporativo para gerenciamento e controle de consultas e agen
 
 ## Inicialização do Ambiente Local
 
-##### Camada de Persistência (Banco de Dados)
+##### 1 - Camada de Persistência (Banco de Dados)
+
 A aplicação estabelece conexão local via porta padrão 5432. Para provisionar a base de dados isolada no PostgreSQL, utilize o DBeaver ou terminal:
 
 CREATE DATABASE sisjur_db;
+
+##### 2 - Ajuste de Credenciais (Java/JPA)
+
+1. Abra o arquivo de configuração localizado em:<br />
+`src/main/resources/META-INF/persistence.xml`
+
+2. Altere as seguintes propriedades de acordo com a sua instalação local do Postgres:<br />
+• **Usuário (Padrão):** `postgres` *(na linha 14)*<br />
+• **Senha:** Altere o `value="root"` *(na linha 15)* para a senha definida no seu servidor local.
 
 ## Status do Roadmap de Desenvolvimento
 - [x] Provisionamento da infraestrutura local e alinhamento de banco de dados.
