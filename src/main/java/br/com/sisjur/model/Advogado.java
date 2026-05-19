@@ -11,9 +11,9 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "advogados")
-public class Advogado implements Serializable {
+public class Advogado extends Pessoa implements Serializable {
 
-	// O JSF exige isso para conseguir salvar e passar os dados do objeto entre as telas
+    // O JSF exige isso para conseguir salvar e passar os dados do objeto entre as telas
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -21,17 +21,8 @@ public class Advogado implements Serializable {
     private Long id;
     
     // Sei que não precisava porque o Hibernate cuida disso, mas usei as anotações @Column só para deixar claro o limite de caracteres e validações
-    @Column(nullable = false, length = 150)
-    private String nome;
-
     @Column(nullable = false, unique = true, length = 20)
     private String oab;
-
-    @Column(length = 20)
-    private String telefone;
-
-    @Column(nullable = false, unique = true, length = 100)
-    private String email;
 
     // Construtor padrao obrigatorio para o Hibernate
     public Advogado() {
@@ -46,36 +37,12 @@ public class Advogado implements Serializable {
         this.id = id;
     }
 
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
     public String getOab() {
         return oab;
     }
 
     public void setOab(String oab) {
         this.oab = oab;
-    }
-
-    public String getTelefone() {
-        return telefone;
-    }
-
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     // Gera um código único pro objeto usando o ID, pro Java não se perder em listas
