@@ -39,11 +39,11 @@ CREATE DATABASE sisjur_db;
 - [x] Configuração do arquivo central de persistência da JPA (persistence.xml).
 - [x] Criação e mapeamento da primeira entidade do sistema (Advogado no pacote model).
 - [x] Implementação de classe temporária de testes (Main) e validação com sucesso da conexão com o PostgreSQL e inserção de dados.
-- [ ] Refatoração: Criação da classe abstrata Pessoa e ajuste de herança em Advogado.
-- [ ] Criação e mapeamento da entidade Cliente (Herdando de Pessoa) + Teste de inserção na Main.
+- [x] Refatoração: Criação da classe abstrata Pessoa e validação da herança em Advogado via testes na Main.
+- [x] Criação e mapeamento da entidade Cliente (Herdando de Pessoa) + Teste de inserção na Main.
 - [ ] Criação e mapeamento do Enum TipoAgendamento e da entidade Agendamento + Teste na Main.
 - [ ] Implementação da camada de persistência: AdvogadoDAO e testes de integração.
 - [ ] Implementação da camada de persistência: ClienteDAO e testes de integração.
 - [ ] Implementação da camada de persistência: AgendamentoDAO e testes de integração.
 - [ ] Implementação dos Managed Beans (camada de controle do JSF) para gerenciamento das regras de tela.
-- [ ] Construção das interfaces gráficas em XHTML utilizando componentes PrimeFaces. 
+- [ ] Construção das interfaces gráficas em XHTML utilizando componentes PrimeFaces.
