@@ -42,6 +42,7 @@ CREATE DATABASE sisjur_db;
 - [x] Refatoração: Criação da classe abstrata Pessoa e validação da herança em Advogado via testes na Main.
 - [x] Criação e mapeamento da entidade Cliente (Herdando de Pessoa) + Teste de inserção na Main.
 - [x] Criação e mapeamento do Enum TipoAgendamento e da entidade Agendamento + Teste na Main.
+- [x] Organizar estrutura de pastas (mover Main para archive).
 - [ ] Implementação da camada de persistência: AdvogadoDAO e testes de integração.
 - [ ] Implementação da camada de persistência: ClienteDAO e testes de integração.
 - [ ] Implementação da camada de persistência: AgendamentoDAO e testes de integração.
