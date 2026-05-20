@@ -41,7 +41,7 @@ CREATE DATABASE sisjur_db;
 - [x] Implementação de classe temporária de testes (Main) e validação com sucesso da conexão com o PostgreSQL e inserção de dados.
 - [x] Refatoração: Criação da classe abstrata Pessoa e validação da herança em Advogado via testes na Main.
 - [x] Criação e mapeamento da entidade Cliente (Herdando de Pessoa) + Teste de inserção na Main.
-- [ ] Criação e mapeamento do Enum TipoAgendamento e da entidade Agendamento + Teste na Main.
+- [x] Criação e mapeamento do Enum TipoAgendamento e da entidade Agendamento + Teste na Main.
 - [ ] Implementação da camada de persistência: AdvogadoDAO e testes de integração.
 - [ ] Implementação da camada de persistência: ClienteDAO e testes de integração.
 - [ ] Implementação da camada de persistência: AgendamentoDAO e testes de integração.
