@@ -343,3 +343,168 @@
        add constraint FKcjwtk4c6rov08v95n16au8ucq 
        foreign key (cliente_id) 
        references clientes;
+
+    create table advogados (
+       id  bigserial not null,
+        cpf varchar(14) not null,
+        email varchar(100) not null,
+        nome varchar(150) not null,
+        telefone varchar(20),
+        oab varchar(20) not null,
+        primary key (id)
+    );
+
+    create table agendamento (
+       id  bigserial not null,
+        dataHora timestamp not null,
+        tipo varchar(255) not null,
+        advogado_id int8 not null,
+        cliente_id int8 not null,
+        primary key (id)
+    );
+
+    create table clientes (
+       id  bigserial not null,
+        cpf varchar(14) not null,
+        email varchar(100) not null,
+        nome varchar(150) not null,
+        telefone varchar(20),
+        numeroProcesso varchar(50),
+        statusProcessual varchar(50),
+        primary key (id)
+    );
+
+    alter table advogados 
+       add constraint UK_f8wa7737pl42tnr7uhef5nf3i unique (cpf);
+
+    alter table advogados 
+       add constraint UK_jd0yl6epmb89235m58n6ha8ho unique (email);
+
+    alter table advogados 
+       add constraint UK_cp0ikk039sialao6balwn9ive unique (oab);
+
+    alter table clientes 
+       add constraint UK_7wflw78ibh162cmq12ii6ffly unique (cpf);
+
+    alter table clientes 
+       add constraint UK_1c96wv36rk2hwui7qhjks3mvg unique (email);
+
+    alter table agendamento 
+       add constraint FK699tdjiidxmq1squqpn4645g9 
+       foreign key (advogado_id) 
+       references advogados;
+
+    alter table agendamento 
+       add constraint FKcjwtk4c6rov08v95n16au8ucq 
+       foreign key (cliente_id) 
+       references clientes;
+
+    create table advogados (
+       id  bigserial not null,
+        cpf varchar(14) not null,
+        email varchar(100) not null,
+        nome varchar(150) not null,
+        telefone varchar(20),
+        oab varchar(20) not null,
+        primary key (id)
+    );
+
+    create table agendamento (
+       id  bigserial not null,
+        dataHora timestamp not null,
+        tipo varchar(255) not null,
+        advogado_id int8 not null,
+        cliente_id int8 not null,
+        primary key (id)
+    );
+
+    create table clientes (
+       id  bigserial not null,
+        cpf varchar(14) not null,
+        email varchar(100) not null,
+        nome varchar(150) not null,
+        telefone varchar(20),
+        numeroProcesso varchar(50),
+        statusProcessual varchar(50),
+        primary key (id)
+    );
+
+    alter table advogados 
+       add constraint UK_f8wa7737pl42tnr7uhef5nf3i unique (cpf);
+
+    alter table advogados 
+       add constraint UK_jd0yl6epmb89235m58n6ha8ho unique (email);
+
+    alter table advogados 
+       add constraint UK_cp0ikk039sialao6balwn9ive unique (oab);
+
+    alter table clientes 
+       add constraint UK_7wflw78ibh162cmq12ii6ffly unique (cpf);
+
+    alter table clientes 
+       add constraint UK_1c96wv36rk2hwui7qhjks3mvg unique (email);
+
+    alter table agendamento 
+       add constraint FK699tdjiidxmq1squqpn4645g9 
+       foreign key (advogado_id) 
+       references advogados;
+
+    alter table agendamento 
+       add constraint FKcjwtk4c6rov08v95n16au8ucq 
+       foreign key (cliente_id) 
+       references clientes;
+
+    create table advogados (
+       id  bigserial not null,
+        cpf varchar(14) not null,
+        email varchar(100) not null,
+        nome varchar(150) not null,
+        telefone varchar(20),
+        oab varchar(20) not null,
+        primary key (id)
+    );
+
+    create table agendamento (
+       id  bigserial not null,
+        dataHora timestamp not null,
+        tipo varchar(255) not null,
+        advogado_id int8 not null,
+        cliente_id int8 not null,
+        primary key (id)
+    );
+
+    create table clientes (
+       id  bigserial not null,
+        cpf varchar(14) not null,
+        email varchar(100) not null,
+        nome varchar(150) not null,
+        telefone varchar(20),
+        numeroProcesso varchar(50),
+        statusProcessual varchar(50),
+        primary key (id)
+    );
+
+    alter table advogados 
+       add constraint UK_f8wa7737pl42tnr7uhef5nf3i unique (cpf);
+
+    alter table advogados 
+       add constraint UK_jd0yl6epmb89235m58n6ha8ho unique (email);
+
+    alter table advogados 
+       add constraint UK_cp0ikk039sialao6balwn9ive unique (oab);
+
+    alter table clientes 
+       add constraint UK_7wflw78ibh162cmq12ii6ffly unique (cpf);
+
+    alter table clientes 
+       add constraint UK_1c96wv36rk2hwui7qhjks3mvg unique (email);
+
+    alter table agendamento 
+       add constraint FK699tdjiidxmq1squqpn4645g9 
+       foreign key (advogado_id) 
+       references advogados;
+
+    alter table agendamento 
+       add constraint FKcjwtk4c6rov08v95n16au8ucq 
+       foreign key (cliente_id) 
+       references clientes;

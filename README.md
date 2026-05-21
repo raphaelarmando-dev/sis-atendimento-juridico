@@ -45,6 +45,6 @@ CREATE DATABASE sisjur_db;
 - [x] Organizar estrutura de pastas (mover Main para archive).
 - [x] Implementação da camada de persistência: AdvogadoDAO e testes de integração.
 - [x] Implementação da camada de persistência: ClienteDAO e testes de integração.
-- [ ] Implementação da camada de persistência: AgendamentoDAO e testes de integração.
+- [x] Implementação da camada de persistência: AgendamentoDAO e testes de integração.
 - [ ] Implementação dos Managed Beans (camada de controle do JSF) para gerenciamento das regras de tela.
 - [ ] Construção das interfaces gráficas em XHTML utilizando componentes PrimeFaces.
