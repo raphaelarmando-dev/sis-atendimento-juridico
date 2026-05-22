@@ -46,5 +46,8 @@ CREATE DATABASE sisjur_db;
 - [x] Implementação da camada de persistência: AdvogadoDAO e testes de integração.
 - [x] Implementação da camada de persistência: ClienteDAO e testes de integração.
 - [x] Implementação da camada de persistência: AgendamentoDAO e testes de integração.
-- [ ] Implementação dos Managed Beans (camada de controle do JSF) para gerenciamento das regras de tela.
+- [x] Implementação dos Managed Beans (camada de controle do JSF) para gerenciamento das regras de tela.
+    - [x] AdvogadoBean implementado
+    - [ ] ClienteBean
+    - [ ] AgendamentoBean 
 - [ ] Construção das interfaces gráficas em XHTML utilizando componentes PrimeFaces.
