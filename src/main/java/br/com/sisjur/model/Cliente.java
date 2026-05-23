@@ -1,13 +1,18 @@
 package br.com.sisjur.model;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
 
 @Entity
 @Table(name = "clientes")
@@ -26,6 +31,10 @@ public class Cliente extends Pessoa implements Serializable {
 
     @Column(length = 50)
     private String numeroProcesso;
+    
+    // Garante exclusão em cascata para evitar erros de integridade (FK)
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    private List<Agendamento> agendamentos;
 
     public Cliente() {
     }
