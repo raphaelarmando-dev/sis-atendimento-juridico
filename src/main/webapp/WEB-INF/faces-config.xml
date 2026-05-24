@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/javaee">
+    <converter>
+        <converter-id>conversorEntidade</converter-id>
+        <converter-class>br.com.sisjur.util.ConversorEntidade</converter-class>
+    </converter>
+</faces-config>
