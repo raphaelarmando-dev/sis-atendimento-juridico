@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <h:head>
+        <title><ui:insert name="titulo">SisJur</ui:insert></title>
+        <h:outputStylesheet library="css" name="style.css" />
+    </h:head>
+
+    <h:body>
+        <div class="header-estilizado">
+            <i class="pi pi-gavel" style="font-size: 2rem; vertical-align: middle; margin-right: 15px;"></i>
+            <span style="vertical-align: middle; font-size: 1.8rem; font-weight: bold;">SisJur - Atendimento Jurídico</span>
+        </div>
+
+        <div class="card-estilizado">
+            <ui:insert name="conteudo" />
+        </div>
+
+        <div class="footer-estilizado">
+            <p>SisJur - Todos os direitos reservados</p>
+            <p>Feito por Raphael Armando</p>
+            <i class="pi pi-star-fill" style="color: #aeb5a8; font-size: 1.2rem;"></i>
+        </div>
+    </h:body>
+</html>
