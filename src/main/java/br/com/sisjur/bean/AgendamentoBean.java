@@ -11,6 +11,7 @@ import javax.inject.Named;
 import br.com.sisjur.model.Agendamento;
 import br.com.sisjur.model.Advogado;
 import br.com.sisjur.model.Cliente;
+import br.com.sisjur.model.TipoAgendamento;
 import br.com.sisjur.dao.AgendamentoDAO;
 import br.com.sisjur.dao.AdvogadoDAO;
 import br.com.sisjur.dao.ClienteDAO;
@@ -29,9 +30,11 @@ public class AgendamentoBean implements Serializable { 			// Estrutura base de A
     private ClienteDAO clienteDAO;
 
     private Agendamento agendamento;
+    private Agendamento agendamentoSelecionado;
     private List<Agendamento> agendamentos;
     private List<Advogado> advogados; 							// Lista para o select
     private List<Cliente> clientes;   							// Lista para o select
+    
 
     @PostConstruct
     public void init() {
@@ -41,7 +44,7 @@ public class AgendamentoBean implements Serializable { 			// Estrutura base de A
     }
 
     public void novo() {
-        agendamento = new Agendamento();
+        this.agendamento = new Agendamento(); 
     }
 
     public void listar() {
@@ -52,10 +55,21 @@ public class AgendamentoBean implements Serializable { 			// Estrutura base de A
         this.advogados = advogadoDAO.listarTodos();
         this.clientes = clienteDAO.listarTodos();
     }
+    
+    public TipoAgendamento[] getTiposAgendamento() {
+        return TipoAgendamento.values();
+    }
 
     public void salvar() {
-        agendamentoDAO.salvar(agendamento);
-        adicionarMensagem("Agendamento salvo!");
+    	if (agendamento.getId() == null) {
+            // ID nulo = é um novo registro, insere no banco
+            agendamentoDAO.salvar(agendamento);
+            adicionarMensagem("Agendamento criado com sucesso!");
+        } else {
+            // ID preenchido = já existe no banco, apenas atualiza
+            agendamentoDAO.atualizar(agendamento);
+            adicionarMensagem("Agendamento atualizado com sucesso!");
+        }
         novo();
         listar();
     }
@@ -67,11 +81,16 @@ public class AgendamentoBean implements Serializable { 			// Estrutura base de A
     }
     
     public void editar(Agendamento ag) {
-        this.agendamento = ag;
+    	this.agendamento = agendamentoDAO.buscarPorId(ag.getId());
+        
     }
 
     private void adicionarMensagem(String msg) {
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(msg));
+    }
+    
+    public void verDetalhes(Agendamento ag) {
+    	this.agendamentoSelecionado = agendamentoDAO.buscarPorId(ag.getId());
     }
 
     // Getters e Setters
@@ -98,4 +117,12 @@ public class AgendamentoBean implements Serializable { 			// Estrutura base de A
     public List<Cliente> getClientes() { 
     	return clientes; 
     }
+    
+    public Agendamento getAgendamentoSelecionado() { 
+    	return agendamentoSelecionado; 
+    }
+    
+    public void setAgendamentoSelecionado(Agendamento agendamentoSelecionado) { 
+    	this.agendamentoSelecionado = agendamentoSelecionado; 
+    }  
 }
