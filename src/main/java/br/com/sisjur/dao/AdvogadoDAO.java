@@ -4,9 +4,12 @@ import br.com.sisjur.model.Advogado;
 import br.com.sisjur.util.JPAUtil;
 import javax.persistence.EntityManager;
 import java.util.List;
+import java.io.Serializable;
 
-public class AdvogadoDAO {
+public class AdvogadoDAO implements Serializable {
 
+	private static final long serialVersionUID = 1L;
+	
     public void salvar(Advogado advogado) {
         EntityManager em = JPAUtil.getEntityManager(); // Pego a conexão da minha fábrica
         try {

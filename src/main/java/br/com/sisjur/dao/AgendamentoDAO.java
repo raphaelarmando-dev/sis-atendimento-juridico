@@ -4,10 +4,13 @@ import br.com.sisjur.model.Agendamento;
 import br.com.sisjur.util.JPAUtil;
 import javax.persistence.EntityManager;
 import java.util.List;
+import java.io.Serializable;
 
-public class AgendamentoDAO {
-															// Segui o mesmo padrao de AdvogadoDAO e ClienteDAO, porem com ajustes para lidar com relacionamento das duas
-    public void salvar(Agendamento agendamento) {
+public class AgendamentoDAO implements Serializable {       // Segui o mesmo padrao de AdvogadoDAO e ClienteDAO, porem com ajustes para lidar com relacionamento das duas
+	
+	private static final long serialVersionUID = 1L;												        
+    
+	public void salvar(Agendamento agendamento) {
         EntityManager em = JPAUtil.getEntityManager();      // Pego a conexão da minha fábrica
         try {
             em.getTransaction().begin();                    // Abro a transação para escrever
