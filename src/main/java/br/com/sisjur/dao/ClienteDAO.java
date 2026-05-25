@@ -13,20 +13,33 @@ public class ClienteDAO implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	
-    public void salvar(Cliente cliente) {                    
-        EntityManager em = JPAUtil.getEntityManager();
-        try {
-            em.getTransaction().begin();
-            Cliente gerenciado = em.merge(cliente);
-            cliente.setId(gerenciado.getId()); 
-            em.getTransaction().commit();
-        } catch (Exception e) {
-            em.getTransaction().rollback();
-            throw e;
-        } finally {
-            em.close();
-        }
-    }
+	public void salvar(Cliente cliente) {
+	    EntityManager em = JPAUtil.getEntityManager();     
+	    try {
+	        em.getTransaction().begin();                   
+	        em.persist(cliente);                           
+	        em.getTransaction().commit();                  
+	    } catch (Exception e) {
+	        em.getTransaction().rollback();                
+	        throw e;                                       
+	    } finally {
+	        em.close();                                    
+	    }
+	}
+
+	public void atualizar(Cliente cliente) {
+	    EntityManager em = JPAUtil.getEntityManager();     
+	    try {
+	        em.getTransaction().begin();                   
+	        em.merge(cliente);                             
+	        em.getTransaction().commit();               
+	    } catch (Exception e) {
+	        em.getTransaction().rollback();    
+	        throw e;                                    
+	    } finally {
+	        em.close();                         
+	    }
+	}
 
     public Cliente buscarPorId(Long id) {
         EntityManager em = JPAUtil.getEntityManager();
