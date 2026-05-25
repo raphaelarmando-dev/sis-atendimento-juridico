@@ -37,10 +37,19 @@ public class ClienteBean implements Serializable {		  // Copiei a estrutura do A
     }
 
     public void salvar() {
-        clienteDAO.salvar(cliente);
-        adicionarMensagem("Cliente salvo com sucesso!");
-        novo();
-        listar();
+        if (cliente.getId() == null) {
+            clienteDAO.salvar(cliente);                        
+            adicionarMensagem("Cliente cadastrado com sucesso!");
+        } else {
+            clienteDAO.atualizar(cliente);            
+            adicionarMensagem("Cliente atualizado com sucesso!");
+        }
+        novo();                                                
+        listar();                                              
+    }
+
+    public void atualizar(Cliente cliente) {
+        this.cliente = clienteDAO.buscarPorId(cliente.getId());   
     }
     
     public void remover(Cliente cli) {
@@ -49,8 +58,8 @@ public class ClienteBean implements Serializable {		  // Copiei a estrutura do A
         listar();
     }
     
-    public void editar(Cliente cli) {
-        this.cliente = cli;
+    public void editar(Cliente cliente) {
+        this.cliente = cliente;
     }
 
     private void adicionarMensagem(String msg) {
