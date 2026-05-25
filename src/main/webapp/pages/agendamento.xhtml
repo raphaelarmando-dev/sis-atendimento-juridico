@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <ui:composition template="/WEB-INF/templates/template.xhtml">
+        <ui:define name="titulo">Gestão de Agendamentos</ui:define>
+
+        <ui:define name="conteudo">
+            <h:form id="formAgendamento">
+
+                <p:toolbar style="border:none; background:none; margin-bottom:10px;">
+                    <p:toolbarGroup>
+                        <p:commandButton value="Novo Agendamento"
+                 						icon="pi pi-plus"
+                 						styleClass="btn-novo"
+                 						process="@this"
+                 						actionListener="#{agendamentoBean.novo}"
+                 						update=":formAgendamento:panelAgendamento"
+                					    oncomplete="PF('dlgAgendamento').show()"
+                 						resetValues="true" />
+                    </p:toolbarGroup>
+                </p:toolbar>
+
+                <p:dataTable id="tabelaAgendamentos"
+                             value="#{agendamentoBean.agendamentos}"
+                             var="ag"
+                             emptyMessage="Nenhum agendamento cadastrado.">
+
+                    <p:column headerText="ID"><h:outputText value="#{ag.id}" /></p:column>
+                    <p:column headerText="Cliente"><h:outputText value="#{ag.cliente.nome}" /></p:column>
+                    <p:column headerText="Advogado"><h:outputText value="#{ag.advogado.nome}" /></p:column>
+                    <p:column headerText="Data/Hora">
+                        <h:outputText value="#{ag.dataHora}">
+                            <f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+                        </h:outputText>
+                    </p:column>
+                    <p:column headerText="Tipo"><h:outputText value="#{ag.tipo}" /></p:column>
+
+                    <p:column headerText="Ações" styleClass="coluna-acoes">
+                        <p:commandButton icon="pi pi-eye"
+                                         title="Ver Detalhes"
+                                         styleClass="btn-tabela"
+                                         actionListener="#{agendamentoBean.verDetalhes(ag)}"
+                                         process="@this"
+                                         update=":formAgendamento:dlgDetalhes"
+                                         oncomplete="PF('dlgDetalhes').show()" />
+
+                        <p:commandButton icon="pi pi-pencil"
+                                         styleClass="btn-tabela"
+                                         process="@this"
+                                         actionListener="#{agendamentoBean.editar(ag)}"
+                                         update=":formAgendamento:panelAgendamento"
+                                         oncomplete="PF('dlgAgendamento').show()"
+                                         style="margin-left: 5px;" />
+
+                        <p:commandButton icon="pi pi-trash"
+                                         styleClass="btn-tabela"
+                                         actionListener="#{agendamentoBean.remover(ag)}"
+                                         update=":formAgendamento:tabelaAgendamentos :formAgendamento:msgs"
+                                         process="@this"
+                                         style="margin-left: 5px;">
+                            <p:confirm header="Confirmação"
+                                       message="Deseja realmente excluir este agendamento?"
+                                       icon="pi pi-exclamation-triangle" />
+                        </p:commandButton>
+                    </p:column>
+                </p:dataTable>
+
+                <p:dialog id="dlgAgendamento" header="Dados do Agendamento" widgetVar="dlgAgendamento" modal="true" resizable="false" width="460">
+                    <h:panelGroup id="panelAgendamento" layout="block" style="padding: 10px;">
+                        <div style="margin-bottom: 12px;">
+                            <p:outputLabel value="Cliente:" style="display:block; margin-bottom:4px; font-weight:bold;" />
+                            <p:selectOneMenu value="#{agendamentoBean.agendamento.cliente}" converter="conversorEntidade" required="true" style="width: 100%">
+                                <f:selectItem itemLabel="-- Selecione --" itemValue="#{null}" />
+                                <f:selectItems value="#{agendamentoBean.clientes}" var="c" itemLabel="#{c.nome}" itemValue="#{c}" />
+                            </p:selectOneMenu>
+                        </div>
+                        <div style="margin-bottom: 12px;">
+                            <p:outputLabel value="Advogado:" style="display:block; margin-bottom:4px; font-weight:bold;" />
+                            <p:selectOneMenu value="#{agendamentoBean.agendamento.advogado}" converter="conversorEntidade" required="true" style="width: 100%">
+                                <f:selectItem itemLabel="-- Selecione --" itemValue="#{null}" />
+                                <f:selectItems value="#{agendamentoBean.advogados}" var="a" itemLabel="#{a.nome}" itemValue="#{a}" />
+                            </p:selectOneMenu>
+                        </div>
+                        <div style="margin-bottom: 12px;">
+                            <p:outputLabel value="Data/Hora:" style="display:block; margin-bottom:4px; font-weight:bold;" />
+                            <p:datePicker value="#{agendamentoBean.agendamento.dataHora}" showTime="true" pattern="dd/MM/yyyy HH:mm" required="true" style="width: 100%" />
+                        </div>
+                        <div style="margin-bottom: 12px;">
+                            <p:outputLabel value="Tipo:" style="display:block; margin-bottom:4px; font-weight:bold;" />
+                            <p:selectOneMenu value="#{agendamentoBean.agendamento.tipo}" required="true" style="width: 100%">
+                                <f:selectItem itemLabel="-- Selecione --" itemValue="#{null}" />
+                                <f:selectItems value="#{agendamentoBean.tiposAgendamento}" var="t" itemLabel="#{t}" itemValue="#{t}" />
+                            </p:selectOneMenu>
+                        </div>
+                        <div style="margin-bottom: 12px;">
+                            <p:outputLabel for="obs" value="Observações:" style="display:block; margin-bottom:4px; font-weight:bold;" />
+                            <p:inputTextarea id="obs" value="#{agendamentoBean.agendamento.observacoes}" rows="4" style="width: 100%; box-sizing: border-box;" />
+                        </div>
+                    </h:panelGroup>
+                    <f:facet name="footer">
+                        <p:commandButton value="Salvar"
+                 								action="#{agendamentoBean.salvar}"
+                 								update=":formAgendamento:tabelaAgendamentos
+                         								:formAgendamento:msgs
+                         								:formAgendamento:panelAgendamento"
+                 								oncomplete="if (!args.validationFailed) PF('dlgAgendamento').hide()" />
+                        <p:commandButton value="Cancelar" onclick="PF('dlgAgendamento').hide()" type="button" style="margin-left: 5px" />
+                    </f:facet>
+                </p:dialog>
+
+                <p:dialog id="dlgDetalhes" header="Detalhes das Observações" widgetVar="dlgDetalhes" modal="true" resizable="false" width="400">
+                    <div style="padding: 10px;">
+                        <h:outputText value="#{agendamentoBean.agendamentoSelecionado.observacoes}" />
+                    </div>
+                    <f:facet name="footer">
+                        <p:commandButton value="Fechar" onclick="PF('dlgDetalhes').hide()" type="button" />
+                    </f:facet>
+                </p:dialog>
+
+                <p:confirmDialog global="true">
+                    <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
+                    <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="pi pi-times" />
+                </p:confirmDialog>
+
+                <p:growl id="msgs" showDetail="true" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>
