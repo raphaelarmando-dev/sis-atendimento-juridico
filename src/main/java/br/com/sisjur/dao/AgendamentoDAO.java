@@ -24,14 +24,34 @@ public class AgendamentoDAO implements Serializable {       // Segui o mesmo pad
             em.close();                                		// Garanto o fechamento para liberar recurso
         }
     }
+	
+	public void atualizar(Agendamento agendamento) {
+		EntityManager em = JPAUtil.getEntityManager();
+	    try {
+	        em.getTransaction().begin();
+	        em.merge(agendamento); 							// merge só para entidades existentes com ID
+	        em.getTransaction().commit();
+	    } catch (Exception e) {
+	        em.getTransaction().rollback();
+	        throw e;
+	    } finally {
+	        em.close();
+	    }
+	}
 
     public Agendamento buscarPorId(Long id) {
         EntityManager em = JPAUtil.getEntityManager();
         try {
-            return em.find(Agendamento.class, id);        	// Busca direta por ID
-        } finally {
-            em.close();                                		// Fecho a conexão de leitura
-        }
+        	return em.createQuery(
+                    "SELECT a FROM Agendamento a " +
+                    "JOIN FETCH a.advogado " +
+                    "JOIN FETCH a.cliente " +
+                    "WHERE a.id = :id", Agendamento.class)
+                    .setParameter("id", id)
+                    .getSingleResult();
+            } finally {
+                em.close();
+            }
     }
 
     public List<Agendamento> buscarPorCliente(Long clienteId) {
@@ -48,10 +68,14 @@ public class AgendamentoDAO implements Serializable {       // Segui o mesmo pad
     public List<Agendamento> listarTodos() {
         EntityManager em = JPAUtil.getEntityManager();
         try {
-            return em.createQuery("SELECT a FROM Agendamento a", Agendamento.class).getResultList(); // Busco agendamentos unindo dados de Advogado e Cliente
-        } finally {
-            em.close();
-        }
+        	return em.createQuery(
+                    "SELECT a FROM Agendamento a " +
+                    "JOIN FETCH a.advogado " +
+                    "JOIN FETCH a.cliente", Agendamento.class)
+                    .getResultList();
+            } finally {
+                em.close();
+            }
     }
 
     public void remover(Long id) {
