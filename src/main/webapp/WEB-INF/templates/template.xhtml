@@ -17,13 +17,35 @@
             <span style="vertical-align: middle; font-size: 1.8rem; font-weight: bold;">SisJur - Atendimento Jurídico</span>
         </div>
 
-        <div class="card-estilizado">
-            <ui:insert name="conteudo" />
+        <div class="layout-principal">
+            <div class="sidebar">
+                <p class="sidebar-titulo">Menu</p>
+
+                <h:link outcome="/pages/agendamento" styleClass="sidebar-item #{request.servletPath.contains('agendamento') ? 'sidebar-item-ativo' : ''}">
+    				<i class="pi pi-calendar"></i>
+    				<span>Agendamentos</span>
+				</h:link>
+
+				<h:link outcome="/pages/cliente" styleClass="sidebar-item #{request.servletPath.contains('cliente') ? 'sidebar-item-ativo' : ''}">
+    				<i class="pi pi-users"></i>
+    				<span>Clientes</span>
+				</h:link>
+
+				<h:link outcome="/pages/advogado" styleClass="sidebar-item #{request.servletPath.contains('advogado') ? 'sidebar-item-ativo' : ''}">
+   					<i class="pi pi-briefcase"></i>
+   					<span>Advogados</span>
+				</h:link>
+            </div>
+            <div class="conteudo-principal">
+                <div class="card-estilizado">
+                    <ui:insert name="conteudo" />
+                </div>
+            </div>
+
         </div>
 
         <div class="footer-estilizado">
-            <p>SisJur - Todos os direitos reservados</p>
-            <p>Feito por Raphael Armando</p>
+            <p>2026 | Desenvolvido por Raphael Armando</p>
             <i class="pi pi-star-fill" style="color: #aeb5a8; font-size: 1.2rem;"></i>
         </div>
     </h:body>
