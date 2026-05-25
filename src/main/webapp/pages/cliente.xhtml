@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <ui:composition template="/WEB-INF/templates/template.xhtml">
+
+        <ui:define name="titulo">Gestão de Clientes</ui:define>
+
+        <ui:define name="conteudo">
+            <h:form id="formCliente">
+
+                <p:toolbar style="border:none; background:none; margin-bottom:10px;">
+                    <p:toolbarGroup>
+                        <p:commandButton value="Novo Cliente"
+                                         icon="pi pi-plus"
+                                         styleClass="btn-novo"
+                                         process="@this"
+                                         actionListener="#{clienteBean.novo}"
+                                         update=":formCliente:panelCliente"
+                                         oncomplete="PF('dlgCliente').show()" />
+                    </p:toolbarGroup>
+                </p:toolbar>
+
+                <p:dataTable id="tabelaClientes"
+                             value="#{clienteBean.clientes}"
+                             var="cliente"
+                             emptyMessage="Nenhum cliente cadastrado."
+                             style="margin-top: 10px;">
+
+                    <p:column headerText="ID"><h:outputText value="#{cliente.id}" /></p:column>
+                    <p:column headerText="Nome"><h:outputText value="#{cliente.nome}" /></p:column>
+                    <p:column headerText="CPF"><h:outputText value="#{cliente.cpf}" /></p:column>
+                    <p:column headerText="E-mail"><h:outputText value="#{cliente.email}" /></p:column>
+                    <p:column headerText="Telefone"><h:outputText value="#{cliente.telefone}" /></p:column>
+
+                    <p:column headerText="Ações" styleClass="coluna-acoes">
+                        <p:commandButton icon="pi pi-pencil"
+                                         styleClass="btn-tabela"
+                                         process="@this"
+                                         actionListener="#{clienteBean.editar(cliente)}"
+                                         update=":formCliente:panelCliente"
+                                         oncomplete="PF('dlgCliente').show()" />
+
+                        <p:commandButton icon="pi pi-trash"
+                                         styleClass="btn-tabela"
+                                         actionListener="#{clienteBean.remover(cliente)}"
+                                         update=":formCliente:tabelaClientes :formCliente:msgs"
+                                         process="@this"
+                                         style="margin-left: 5px;">
+                            <p:confirm header="Confirmação"
+                                       message="Deseja realmente excluir este cliente?"
+                                       icon="pi pi-exclamation-triangle" />
+                        </p:commandButton>
+                    </p:column>
+
+                </p:dataTable>
+
+                <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                    <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
+                    <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="pi pi-times" />
+                </p:confirmDialog>
+
+                <p:dialog id="dlgCliente" header="Dados do Cliente" widgetVar="dlgCliente" modal="true" resizable="false" width="500">
+                    <h:panelGroup id="panelCliente" layout="block" style="padding: 10px;">
+                        <p:panelGrid columns="2" style="width: 100%" styleClass="ui-panelgrid-blank">
+                            <p:outputLabel value="Nome:" for="nome" style="font-weight:bold;" />
+                            <p:inputText id="nome" value="#{clienteBean.cliente.nome}" required="true" style="width: 100%" />
+
+                            <p:outputLabel value="CPF:" for="cpf" style="font-weight:bold;" />
+                            <p:inputMask id="cpf" value="#{clienteBean.cliente.cpf}" mask="999.999.999-99" required="true" style="width: 100%" />
+
+                            <p:outputLabel value="E-mail:" for="email" style="font-weight:bold;" />
+                            <p:inputText id="email" value="#{clienteBean.cliente.email}" style="width: 100%" />
+
+                            <p:outputLabel value="Telefone:" for="telefone" style="font-weight:bold;" />
+                            <p:inputText id="telefone" value="#{clienteBean.cliente.telefone}" style="width: 100%" />
+                        </p:panelGrid>
+                    </h:panelGroup>
+
+                    <f:facet name="footer">
+                        <p:commandButton value="Salvar" icon="pi pi-check"
+                                         action="#{clienteBean.salvar}"
+                                         update=":formCliente:tabelaClientes :formCliente:msgs :formCliente:panelCliente"
+                                         oncomplete="if (!args.validationFailed) PF('dlgCliente').hide()" />
+                        <p:commandButton value="Cancelar" icon="pi pi-times"
+                                         onclick="PF('dlgCliente').hide()"
+                                         type="button" style="margin-left: 5px" />
+                    </f:facet>
+                </p:dialog>
+
+                <p:growl id="msgs" showDetail="true" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>
