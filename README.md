@@ -8,18 +8,28 @@ Componente backend corporativo para gerenciamento e controle de consultas e agen
 * **Alvo de Compilação (Source/Target):** Java 1.8 (Java 8)
 * **Gerenciador de Build:** Maven 3.x
 * **Servidor de Aplicação:** Apache Tomcat 9.x
-* **Banco de Dados:** PostgreSQL 18.3
+* **Banco de Dados:** PostgreSQL 15 (Docker) / 18.3 (local)
 * **Mapeamento Objeto-Relacional (ORM):** JPA 2.2 / Hibernate Core 5.6.15.Final
 * **Framework MVC / Visão:** JSF 2.2.20 (Mojarra)
 * **Componentes de UI:** PrimeFaces 13.0
 
 ## Inicialização do Ambiente Local
 
+##### Opção 1 — Docker (recomendado)
+
+Suba o PostgreSQL com um único comando na raiz do projeto:
+
+    docker-compose up -d
+
+O banco `sisjur_db` será criado automaticamente com usuário `postgres` e senha `root` na porta `5432`.
+
+##### Opção 2 — PostgreSQL local
+
 ##### 1 - Camada de Persistência (Banco de Dados)
 
 A aplicação estabelece conexão local via porta padrão 5432. Para provisionar a base de dados isolada no PostgreSQL, utilize o DBeaver ou terminal:
 
-CREATE DATABASE sisjur_db;
+    CREATE DATABASE sisjur_db;
 
 ##### 2 - Ajuste de Credenciais (Java/JPA)
 
@@ -30,7 +40,46 @@ CREATE DATABASE sisjur_db;
 • **Usuário (Padrão):** `postgres` *(na linha 14)*<br />
 • **Senha:** Altere o `value="root"` *(na linha 15)* para a senha definida no seu servidor local.
 
+## Compilando e Executando
+
+1. Clone o repositório:<br />
+`git clone https://github.com/raphaelarmando-dev/sis-atendimento-juridico.git`
+
+2. Compile o projeto com Maven:<br />
+`mvn clean package`
+
+3. Copie o `.war` gerado para a pasta `webapps` do Tomcat:<br />
+`cp target/sis-atendimento-juridico.war $CATALINA_HOME/webapps/`
+
+4. Inicie o Tomcat e acesse:<br />
+`http://localhost:8080/sis-atendimento-juridico/pages/agendamento.xhtml`
+
+## Estrutura do Projeto
+
+    src/
+    ├── main/
+    │   ├── java/br/com/sisjur/
+    │   │   ├── bean/        # ManagedBeans (AgendamentoBean, ClienteBean, AdvogadoBean)
+    │   │   ├── dao/         # Camada de persistência (AgendamentoDAO, ClienteDAO, AdvogadoDAO)
+    │   │   ├── model/       # Entidades JPA (Agendamento, Cliente, Advogado)
+    │   │   └── util/        # JPAUtil - fábrica do EntityManager
+    │   ├── resources/
+    │   │   └── META-INF/
+    │   │       └── persistence.xml
+    │   └── webapp/
+    │       ├── pages/       # Páginas XHTML
+    │       │   ├── agendamento.xhtml
+    │       │   ├── cliente.xhtml
+    │       │   └── advogado.xhtml
+    │       ├── WEB-INF/
+    │       │   └── templates/
+    │       │       └── template.xhtml
+    │       └── resources/
+    │           └── css/
+    │               └── style.css
+
 ## Status do Roadmap de Desenvolvimento
+
 - [x] Provisionamento da infraestrutura local e alinhamento de banco de dados.
 - [x] Configuração de autenticação remota segura via GitHub Personal Access Token (GHP).
 - [x] Criação do primeiro commit estável e push da branch main.
@@ -47,7 +96,17 @@ CREATE DATABASE sisjur_db;
 - [x] Implementação da camada de persistência: ClienteDAO e testes de integração.
 - [x] Implementação da camada de persistência: AgendamentoDAO e testes de integração.
 - [x] Implementação dos Managed Beans (camada de controle do JSF) para gerenciamento das regras de tela.
-    - [x] AdvogadoBean implementado
-    - [x] ClienteBean implementado
-    - [x] AgendamentoBean implementado
-- [ ] Construção das interfaces gráficas em XHTML utilizando componentes PrimeFaces.
+    - [x] AdvogadoBean implementado.
+    - [x] ClienteBean implementado.
+    - [x] AgendamentoBean implementado.
+- [x] Refatoração: Processo de fixes baseados na interface gráfica.
+- [x] Construção das interfaces gráficas em XHTML utilizando componentes PrimeFaces.
+    - [x] agendamento.xhtml implementado.
+    - [x] cliente.xhtml implementado.
+    - [x] advogado.xhtml implementado.
+- [x] Adição de navegação lateral (sidebar) para acesso às telas de Agendamentos, Clientes e Advogados.
+- [x] Containerização do banco de dados via Docker Compose.
+
+## Desenvolvido por
+
+Raphael Armando - 2026
