@@ -8,8 +8,6 @@ import br.com.sisjur.model.Advogado;
 import br.com.sisjur.model.Cliente;
 import br.com.sisjur.model.TipoAgendamento;
 
-import java.time.LocalDateTime;
-
 public class AgendamentoDAOTest {
 
     public static void main(String[] args) {
@@ -43,7 +41,7 @@ public class AgendamentoDAOTest {
             Agendamento ag = new Agendamento(); 					// Criei o objeto Agendamento
             ag.setAdvogado(adv);
             ag.setCliente(cli);
-            ag.setDataHora(LocalDateTime.now());
+            ag.setDataHora(new java.util.Date());
             ag.setTipo(TipoAgendamento.TRIAGEM);
 
             agDAO.salvar(ag);                                     	// Salvei o agendamento

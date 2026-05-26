@@ -62,11 +62,9 @@ public class AgendamentoBean implements Serializable { 			// Estrutura base de A
 
     public void salvar() {
     	if (agendamento.getId() == null) {
-            // ID nulo = é um novo registro, insere no banco
             agendamentoDAO.salvar(agendamento);
             adicionarMensagem("Agendamento criado com sucesso!");
         } else {
-            // ID preenchido = já existe no banco, apenas atualiza
             agendamentoDAO.atualizar(agendamento);
             adicionarMensagem("Agendamento atualizado com sucesso!");
         }
