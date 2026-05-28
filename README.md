@@ -2,6 +2,19 @@
 
 Componente backend corporativo para gerenciamento e controle de consultas e agendamentos jurídicos, estruturado sobre o ecossistema Java EE (namespace clássico javax).
 
+## Preview
+
+<img width="1849" height="966" alt="image" src="https://github.com/user-attachments/assets/cdc9ac86-4fac-4f2c-b360-368f2c9c4e60" />
+
+----
+<img width="1849" height="966" alt="image" src="https://github.com/user-attachments/assets/cb984032-f7c9-41f4-a72f-808728dfb9da" />
+
+----
+
+<img width="1849" height="966" alt="image" src="https://github.com/user-attachments/assets/fac605e5-6b23-497f-a1b2-fe633f6b2caa" />
+
+
+
 ## Matriz de Compatibilidade Arquitetural
 
 * **Ambiente de Execução (Runtime):** Java 21 (OpenJDK)
